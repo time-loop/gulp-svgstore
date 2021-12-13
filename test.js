@@ -287,14 +287,14 @@ describe('gulp-svgstore unit test', () => {
       stream.end()
   })
 
-  it('should transfer svg presentation attributes to a wrapping g element', (done) => {
+  it('should transfer svg presentation attributes to the symbol element', (done) => {
       const stream = svgstore({ inlineSvg: true })
       const attrs = 'stroke="currentColor" stroke-width="2" stroke-linecap="round" style="fill:#0000"';
 
       stream.on('data', (file) => {
         assert.strictEqual(
           '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">' +
-          `<symbol id="rect"><g ${attrs}><rect width="1" height="1"/></g></symbol></svg>`,
+          `<symbol id="rect" ${attrs}><rect width="1" height="1"/></symbol></svg>`,
           file.contents.toString()
         )
         done()

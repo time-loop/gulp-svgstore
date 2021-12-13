@@ -129,19 +129,12 @@ module.exports = function (config) {
       $defs.remove()
     }
 
-    let $groupWrap = null
     for (let [name, value] of Object.entries($svg.attr())) {
       if (!presentationAttributes.has(name)) continue;
-      if (!$groupWrap) $groupWrap = $('<g/>')
-      $groupWrap.attr(name, value)
+      $symbol.attr(name, value)
     }
 
-    if ($groupWrap) {
-      $groupWrap.append($svg.contents())
-      $symbol.append($groupWrap)
-    } else {
-      $symbol.append($svg.contents())
-    }
+    $symbol.append($svg.contents())
     $combinedSvg.append($symbol)
     cb()
   }
